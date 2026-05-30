@@ -1,8 +1,8 @@
-import { PortableTextBlock, Image } from 'sanity';
+import { PortableTextBlock} from 'sanity';
 
 // --- Shared ---
 
-export interface SanityImage extends Image {
+export interface SanityImage {
   asset: { url: string };
   alt: string;
   caption?: string;

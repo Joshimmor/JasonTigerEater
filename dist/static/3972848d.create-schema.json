@@ -1,0 +1,977 @@
+[
+  {
+    "fields": [
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "level": "warning",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 300
+              }
+            ],
+            "message": "Keep this under 300 characters for best results."
+          }
+        ],
+        "description": "One paragraph. Used on the homepage, press kit, and social previews.",
+        "name": "shortBio",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "The full band story. Used on the About page.",
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "longBio",
+        "type": "array",
+        "title": "Full Bio"
+      },
+      {
+        "validation": [
+          {
+            "level": "warning",
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 120
+              }
+            ],
+            "message": "Keep this punchy — under 120 characters."
+          }
+        ],
+        "description": "A bold one-liner that captures the band's essence. Displayed large on the About page.",
+        "name": "pullQuote",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "message": "Upload at least one band photo."
+          }
+        ],
+        "description": "High-res photos. First photo is used as the hero image.",
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Describe the photo for accessibility.",
+                "name": "alt",
+                "type": "string",
+                "title": "Alt Text"
+              },
+              {
+                "name": "caption",
+                "type": "string"
+              },
+              {
+                "description": "Photographer name if applicable.",
+                "name": "credit",
+                "type": "string",
+                "title": "Photo Credit"
+              }
+            ],
+            "type": "image"
+          }
+        ],
+        "name": "bandPhotos",
+        "type": "array"
+      },
+      {
+        "description": "Optional. Displayed on the About page.",
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "e.g. Vocals, Producer, Guitar",
+                "name": "role",
+                "type": "string"
+              },
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "name": "photo",
+                "type": "image"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "members",
+        "type": "array",
+        "title": "Band Members"
+      }
+    ],
+    "name": "bio",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "How did the band come together? Where are they from? Used as the opening section of the About page.",
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "originStory",
+        "type": "array"
+      },
+      {
+        "options": {
+          "layout": "tags"
+        },
+        "description": "Artists, sounds, or movements that shape the music. Displayed as tags.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "influences",
+        "type": "array"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ]
+          }
+        ],
+        "description": "How would you describe the sound in your own words? e.g. \"Raw Atlanta street rap meets lo-fi indie texture.\"",
+        "name": "soundDescription",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "e.g. Atlanta, GA",
+        "name": "city",
+        "type": "string",
+        "title": "Hometown / City"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1900
+              },
+              {
+                "flag": "max",
+                "constraint": 2026
+              }
+            ]
+          }
+        ],
+        "name": "yearFormed",
+        "type": "number"
+      },
+      {
+        "rows": 4,
+        "description": "What's the live experience like? Used on the Booking page to sell promoters.",
+        "name": "liveShowDescription",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Main image displayed on the About page. Choose something atmospheric.",
+        "fields": [
+          {
+            "validation": [
+              {
+                "level": "error",
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ]
+              }
+            ],
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "featuredImage",
+        "type": "image",
+        "title": "Featured About Page Image"
+      }
+    ],
+    "name": "about",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "rows": 6,
+        "validation": [
+          {
+            "level": "warning",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 600
+              }
+            ],
+            "message": "Press bios should be under 600 characters."
+          }
+        ],
+        "description": "Short, punchy bio written in third person. This is what journalists and promoters copy-paste.",
+        "name": "pressBio",
+        "type": "text"
+      },
+      {
+        "options": {
+          "accept": ".pdf"
+        },
+        "description": "Downloadable Electronic Press Kit. Upload a PDF — shown as a download button.",
+        "name": "epkPdf",
+        "type": "file",
+        "title": "EPK PDF"
+      },
+      {
+        "description": "Upload PNG with transparent background. Include light and dark versions if possible.",
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "e.g. \"White on transparent\", \"Black on transparent\", \"Full color\"",
+                "name": "label",
+                "type": "string"
+              }
+            ],
+            "type": "image"
+          }
+        ],
+        "name": "logos",
+        "type": "array"
+      },
+      {
+        "description": "Reviews, features, or mentions from blogs, magazines, or outlets.",
+        "of": [
+          {
+            "fields": [
+              {
+                "rows": 3,
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "quote",
+                "type": "text"
+              },
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "e.g. \"The FADER\", \"Pigeons & Planes\"",
+                "name": "publication",
+                "type": "string",
+                "title": "Publication / Source"
+              },
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "name": "url",
+                "type": "url",
+                "title": "Link to Article"
+              },
+              {
+                "name": "year",
+                "type": "number"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "pressQuotes",
+        "type": "array"
+      },
+      {
+        "description": "High-res photos available for press use. These will be downloadable on the Press page.",
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "alt",
+                "type": "string",
+                "title": "Alt Text"
+              },
+              {
+                "name": "credit",
+                "type": "string",
+                "title": "Photo Credit"
+              }
+            ],
+            "type": "image"
+          }
+        ],
+        "name": "pressPhotos",
+        "type": "array"
+      },
+      {
+        "options": {
+          "accept": ".pdf"
+        },
+        "description": "PDF of technical requirements for venues. Optional but useful for booking.",
+        "name": "techRider",
+        "type": "file"
+      },
+      {
+        "options": {
+          "accept": ".pdf,.png,.jpg"
+        },
+        "description": "PDF or image showing stage layout.",
+        "name": "stagePlot",
+        "type": "file"
+      },
+      {
+        "description": "Key numbers to impress promoters. Update these periodically.",
+        "fields": [
+          {
+            "name": "monthlyListeners",
+            "type": "number",
+            "title": "Spotify Monthly Listeners"
+          },
+          {
+            "name": "totalStreams",
+            "type": "number"
+          },
+          {
+            "name": "instagramFollowers",
+            "type": "number"
+          },
+          {
+            "name": "tiktokFollowers",
+            "type": "number",
+            "title": "TikTok Followers"
+          },
+          {
+            "name": "statsAsOf",
+            "type": "date",
+            "title": "Stats as of (date)"
+          }
+        ],
+        "name": "streamingStats",
+        "type": "object"
+      },
+      {
+        "description": "Displayed on the Press page for industry contacts.",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "title": "Contact Name"
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "title": "Booking Email"
+          },
+          {
+            "name": "phone",
+            "type": "string",
+            "title": "Phone (optional)"
+          }
+        ],
+        "name": "bookingContact",
+        "type": "object"
+      }
+    ],
+    "name": "pressKit",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "warning",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "message": "Must be a valid https URL."
+          }
+        ],
+        "description": "Full URL e.g. https://instagram.com/jasontigereater",
+        "name": "instagram",
+        "type": "url"
+      },
+      {
+        "validation": [
+          {
+            "level": "warning",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "message": "Must be a valid https URL."
+          }
+        ],
+        "description": "Full URL e.g. https://tiktok.com/@jasontigereater",
+        "name": "tiktok",
+        "type": "url",
+        "title": "TikTok"
+      },
+      {
+        "validation": [
+          {
+            "level": "warning",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "message": "Must be a valid https URL."
+          }
+        ],
+        "description": "Full URL e.g. https://open.spotify.com/artist/...",
+        "name": "spotify",
+        "type": "url",
+        "title": "Spotify Artist Page"
+      },
+      {
+        "validation": [
+          {
+            "level": "warning",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "message": "Must be a valid https URL."
+          }
+        ],
+        "description": "Full URL e.g. https://music.apple.com/us/artist/...",
+        "name": "appleMusic",
+        "type": "url"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "Optional. Full channel URL.",
+        "name": "youtube",
+        "type": "url",
+        "title": "YouTube"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "Optional. Full URL to Bandcamp store.",
+        "name": "bandcamp",
+        "type": "url"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "Optional. Full URL to Shopify store.",
+        "name": "shopify",
+        "type": "url",
+        "title": "Merch Store (Shopify)"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "message": "Must be a valid email address."
+          }
+        ],
+        "description": "The email address that receives booking inquiries from the contact form.",
+        "name": "bookingEmail",
+        "type": "string"
+      }
+    ],
+    "name": "socialLinks",
+    "type": "document"
+  }
+]

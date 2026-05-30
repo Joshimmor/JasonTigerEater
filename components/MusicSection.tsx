@@ -125,7 +125,7 @@ export default function MusicSection({ releases, spotifyArtistId }: MusicSection
       </div>
 
       {/* Platform links */}
-      <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', paddingTop: '8px', borderTop: '0.5px solid #2A2A2A' }}>
+      <div style={{ display: 'flex',  justifyContent: 'space-between', flexWrap: 'wrap', paddingTop: '8px', borderTop: '0.5px solid #2A2A2A' }}>
         {[
           { label: 'Spotify', href: `https://open.spotify.com/artist/${spotifyArtistId}` },
           { label: 'Apple Music', href: process.env.NEXT_PUBLIC_APPLE_MUSIC_URL ?? '#' },

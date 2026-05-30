@@ -109,12 +109,12 @@ export default function HeroSection({ photoUrl, photoAlt = 'Jason Tiger Eater' }
         opacity: loaded ? 0.35 : 0,
         transition: 'opacity 1s ease 1s',
       }}>
-        <div style={{
+        {/* <div style={{
           width: '1px',
           height: '40px',
           background: '#C84B00',
           animation: 'jteScrollPulse 2s ease-in-out infinite',
-        }} />
+        }} /> */}
       </div>
 
       <style>{`

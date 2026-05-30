@@ -43,7 +43,7 @@ export default function HeroSection({ photoUrl, photoAlt = 'Jason Tiger Eater' }
         }}
       >
         {/* Photo */}
-        <div style={{ position: 'absolute', inset: 0, background: '#C8BFB5', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, background: '#00000000', overflow: 'hidden' }}>
           {photoUrl ? (
             <Image
               src={photoUrl}

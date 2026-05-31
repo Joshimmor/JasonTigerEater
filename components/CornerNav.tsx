@@ -47,13 +47,13 @@ export default function CornerNav() {
   const baseStyle: React.CSSProperties = {
     position: 'fixed',
     zIndex: 50,
-    fontSize: '10px',
-    letterSpacing: '0.2em',
+    fontSize: '20px',
+    letterSpacing: '0.1em',
     textTransform: 'uppercase',
     textDecoration: 'none',
-    fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-    fontWeight: 600,
+    fontFamily: "var(--font-virtual-realm), sans-serif",
     transition: 'color 0.4s ease',
+    
   };
 
   return (

@@ -39,9 +39,9 @@ export default function HeroSection({ photoUrl, photoAlt = 'Jason Tiger Eater' }
         style={{
           position: 'relative',
           width: '75%',
-          maxWidth: '1000px',
+          // maxWidth: '1000px',
           height: 'auto',
-          aspectRatio: '3/4',
+          aspectRatio: '4/4',
           opacity: loaded ? 1 : 0,
           transform: loaded ? 'translateY(0)' : 'translateY(24px)',
           transition: 'opacity 0.9s ease, transform 0.9s ease',

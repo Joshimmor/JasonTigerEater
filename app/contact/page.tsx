@@ -1,272 +1,171 @@
 'use client';
 // app/contact/page.tsx
 import { useState } from 'react';
+import { motion, cubicBezier } from 'framer-motion';
 
-type InquiryType = 'general' | 'booking' | '';
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
 
-interface FormState {
-  inquiryType: InquiryType;
-  name: string;
-  email: string;
-  message: string;
-  // Booking only
-  eventDate: string;
-  venue: string;
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: cubicBezier(0.16, 1, 0.3, 1) } },
+};
+
+const lineGrow = {
+  hidden: { scaleX: 0, originX: 0 },
+  show: { scaleX: 1, transition: { duration: 0.8, ease: cubicBezier(0.16, 1, 0.3, 1) } },
+};
+
+function Field({
+  label, type = 'text', textarea = false, value, onChange, required,
+}: {
+  label: string; type?: string; textarea?: boolean;
+  value: string; onChange: (v: string) => void; required?: boolean;
+}) {
+  const [focused, setFocused] = useState(false);
+  const base: React.CSSProperties = {
+    width: '100%', background: 'transparent', border: 'none',
+    borderBottom: `1px solid ${focused ? '#C84B00' : '#E0D8D0'}`,
+    outline: 'none', padding: '10px 0', resize: 'none',
+    fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+    fontSize: '15px', color: '#111',
+    transition: 'border-color 0.25s ease',
+  };
+  return (
+    <motion.div variants={fadeUp} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+      <label style={{
+        fontSize: '9px', letterSpacing: '0.22em', textTransform: 'uppercase',
+        fontWeight: 700, color: focused ? '#C84B00' : '#bbb',
+        fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+        transition: 'color 0.25s ease',
+      }}>
+        {label}
+      </label>
+      {textarea
+        ? <textarea rows={4} value={value} required={required}
+            onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
+            onChange={e => onChange(e.target.value)}
+            style={{ ...base, lineHeight: 1.6 }} />
+        : <input type={type} value={value} required={required}
+            onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
+            onChange={e => onChange(e.target.value)}
+            style={base} />
+      }
+    </motion.div>
+  );
 }
 
-const ORANGE = '#C84B00';
-const BLACK = '#111111';
-const WHITE = '#ffffff';
-
-const labelStyle: React.CSSProperties = {
-  display: 'block',
-  fontSize: '9px',
-  letterSpacing: '0.22em',
-  color: ORANGE,
-  textTransform: 'uppercase',
-  marginTop: '24px',
-  marginBottom: '6px',
-  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-};
-
-const inputStyle: React.CSSProperties = {
-  display: 'block',
-  width: '100%',
-  border: 'none',
-  borderBottom: `1.5px solid ${BLACK}`,
-  background: WHITE,
-  color: BLACK,
-  fontSize: '13px',
-  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-  padding: '8px 0',
-  outline: 'none',
-  appearance: 'none',
-  WebkitAppearance: 'none',
-  borderRadius: 0,
-  boxSizing: 'border-box',
-  WebkitBoxShadow: `0 0 0px 1000px ${WHITE} inset`,
-  WebkitTextFillColor: BLACK,
-};
-
 export default function ContactPage() {
-  const [form, setForm] = useState<FormState>({
-    inquiryType: '',
-    name: '',
-    email: '',
-    message: '',
-    eventDate: '',
-    venue: '',
-  });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-
-  function update(field: keyof FormState, value: string) {
-    setForm(prev => ({ ...prev, [field]: value }));
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.inquiryType || !form.name || !form.email || !form.message) return;
-
     setStatus('sending');
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ name, email, message }),
       });
-      if (!res.ok) throw new Error('Failed');
+      if (!res.ok) throw new Error();
       setStatus('sent');
+      setName(''); setEmail(''); setMessage('');
     } catch {
       setStatus('error');
     }
   }
 
-  const isBooking = form.inquiryType === 'booking';
-
   return (
-    <main
-      data-navcolor={ORANGE}
-      style={{
-        minHeight: '100svh',
-        background: WHITE,
-        padding: '80px 28px 80px',
-        maxWidth: '560px',
-        margin: '0 auto',
-        boxSizing: 'border-box',
-        width: '100vw',
-      }}
-    >
-      {/* Heading */}
-      <p style={{
-        fontSize: '9px',
-        letterSpacing: '0.25em',
-        color: ORANGE,
-        textTransform: 'uppercase',
-        margin: '0 0 10px',
-        fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-      }}>
-        Jason Tiger Eater
-      </p>
-      <h1 style={{
-        fontSize: 'clamp(48px, 14vw, 80px)',
-        fontWeight: 900,
-        lineHeight: 0.88,
-        letterSpacing: '-0.03em',
-        color: BLACK,
-        textTransform: 'uppercase',
-        margin: '0 0 48px',
-        fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-      }}>
-        GET IN<br /><span style={{ color: ORANGE }}>TOUCH</span>
-      </h1>
+    <main style={{
+      minHeight: '100svh', background: '#fff',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: '80px 28px',
+    }}>
+      <motion.div
+        variants={container} initial="hidden" animate="show"
+        style={{ width: '100%', maxWidth: '480px', display: 'flex', flexDirection: 'column', gap: '40px' }}
+      >
+        {/* Label */}
+        <motion.p variants={fadeUp} style={{
+          fontSize: '10px', letterSpacing: '0.28em', textTransform: 'uppercase',
+          color: '#C84B00', fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+          margin: 0,
+        }}>
+          Booking Inquiry
+        </motion.p>
 
-      {status === 'sent' ? (
-        <div style={{ paddingTop: '40px' }}>
-          <p style={{
+        {/* Heading */}
+        <div>
+          <motion.h1 variants={fadeUp} style={{
             fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-            fontSize: '32px',
-            fontWeight: 900,
-            color: ORANGE,
-            textTransform: 'uppercase',
-            lineHeight: 1,
-            margin: '0 0 12px',
+            fontSize: 'clamp(52px, 14vw, 88px)', fontWeight: 900,
+            lineHeight: 0.88, letterSpacing: '-0.03em',
+            color: '#111', textTransform: 'uppercase', margin: 0,
           }}>
-            Message<br />Sent.
-          </p>
-          <p style={{
-            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-            fontSize: '12px',
-            color: BLACK,
-            opacity: 0.5,
-            letterSpacing: '0.05em',
-          }}>
-            We'll be in touch soon.
-          </p>
+            GET<br />IN<br /><span style={{ color: '#C84B00' }}>TOUCH</span>
+          </motion.h1>
+          <motion.div variants={lineGrow} style={{
+            height: '2px', background: '#C84B00', marginTop: '20px', width: '48px',
+          }} />
         </div>
-      ) : (
-        <form onSubmit={handleSubmit} noValidate>
 
-          {/* Inquiry Type */}
-          <label style={labelStyle}>Inquiry Type</label>
-          <div style={{ position: 'relative' }}>
-            <select
-              value={form.inquiryType}
-              onChange={e => update('inquiryType', e.target.value)}
-              required
-              style={{
-                ...inputStyle,
-                cursor: 'pointer',
-                paddingRight: '20px',
-                color: form.inquiryType ? BLACK : `${BLACK}55`,
-              }}
-            >
-              <option value="" disabled>Select one</option>
-              <option value="general">General Contact</option>
-              <option value="booking">Booking Inquiry</option>
-            </select>
-            <span style={{
-              position: 'absolute',
-              right: 0,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              color: ORANGE,
-              fontSize: '10px',
-              pointerEvents: 'none',
-            }}>↓</span>
-          </div>
-
-          {/* Name */}
-          <label style={labelStyle}>Name</label>
-          <input
-            type="text"
-            value={form.name}
-            onChange={e => update('name', e.target.value)}
-            placeholder="Your name"
-            required
-            style={inputStyle}
-          />
-
-          {/* Email */}
-          <label style={labelStyle}>Email</label>
-          <input
-            type="email"
-            value={form.email}
-            onChange={e => update('email', e.target.value)}
-            placeholder="your@email.com"
-            required
-            style={inputStyle}
-          />
-
-          {/* Booking-specific fields */}
-          {isBooking && (
-            <>
-              <label style={labelStyle}>Event Date</label>
-              <input
-                type="date"
-                value={form.eventDate}
-                onChange={e => update('eventDate', e.target.value)}
-                style={inputStyle}
-              />
-
-              <label style={labelStyle}>Venue / Location</label>
-              <input
-                type="text"
-                value={form.venue}
-                onChange={e => update('venue', e.target.value)}
-                placeholder="Venue name and city"
-                style={inputStyle}
-              />
-            </>
-          )}
-
-          {/* Message */}
-          <label style={labelStyle}>Message</label>
-          <textarea
-            value={form.message}
-            onChange={e => update('message', e.target.value)}
-            placeholder={isBooking ? 'Tell us about the event, expected attendance, budget...' : 'What\'s on your mind?'}
-            rows={5}
-            required
-            style={{ ...inputStyle, resize: 'none', paddingTop: '8px', lineHeight: 1.6 }}
-          />
-
-          {status === 'error' && (
+        {/* Success state */}
+        {status === 'sent' ? (
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <p style={{
               fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-              fontSize: '11px',
-              color: 'red',
-              marginTop: '12px',
-              letterSpacing: '0.05em',
+              fontSize: '15px', color: '#111', lineHeight: 1.7,
             }}>
-              Something went wrong — please try again.
+              Message received —<br />we'll be in touch shortly.
             </p>
-          )}
-
-          {/* Submit */}
-          <button
-            type="submit"
-            disabled={status === 'sending'}
-            style={{
-              marginTop: '32px',
-              width: '100%',
-              background: status === 'sending' ? `${ORANGE}80` : ORANGE,
-              color: WHITE,
-              border: 'none',
-              padding: '16px',
-              fontSize: '11px',
-              fontWeight: 800,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              cursor: status === 'sending' ? 'not-allowed' : 'pointer',
+            <button onClick={() => setStatus('idle')} style={{
+              marginTop: '24px', background: 'none', border: 'none', padding: 0, cursor: 'pointer',
               fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-              transition: 'opacity 0.2s',
-            }}
-          >
-            {status === 'sending' ? 'Sending...' : 'Send Message →'}
-          </button>
+              fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C84B00',
+            }}>
+              Send another →
+            </button>
+          </motion.div>
+        ) : (
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+            <Field label="Name"    value={name}    onChange={setName}    required />
+            <Field label="Email"   type="email" value={email}   onChange={setEmail}   required />
+            <Field label="Message" textarea     value={message} onChange={setMessage} required />
 
-        </form>
-      )}
+            <motion.div variants={fadeUp}>
+              <motion.button
+                type="submit"
+                disabled={status === 'sending'}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  background: '#C84B00', color: '#fff', border: 'none',
+                  padding: '16px 36px', cursor: status === 'sending' ? 'not-allowed' : 'pointer',
+                  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                  fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700,
+                  opacity: status === 'sending' ? 0.6 : 1, transition: 'opacity 0.2s',
+                }}
+              >
+                {status === 'sending' ? 'Sending...' : 'Send →'}
+              </motion.button>
+
+              {status === 'error' && (
+                <p style={{
+                  marginTop: '12px', fontSize: '11px', color: '#e53e3e',
+                  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                }}>
+                  Something went wrong — please try again.
+                </p>
+              )}
+            </motion.div>
+          </form>
+        )}
+      </motion.div>
     </main>
   );
 }

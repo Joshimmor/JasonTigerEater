@@ -11,6 +11,17 @@ interface HeroSectionProps {
 export default function HeroSection({ photoUrl, photoAlt = 'Jason Tiger Eater' }: HeroSectionProps) {
   const [loaded, setLoaded] = useState(false);
 
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  useEffect(() => {
+    // Handler to call on window resize
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initialize size
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 80);
     return () => clearTimeout(t);
@@ -38,7 +49,7 @@ export default function HeroSection({ photoUrl, photoAlt = 'Jason Tiger Eater' }
         suppressHydrationWarning
         style={{
           position: 'relative',
-          width: '75%',
+          width: windowSize.width > 768 ? '50%' : '100%',
           // maxWidth: '1000px',
           height: 'auto',
           aspectRatio: '4/4',

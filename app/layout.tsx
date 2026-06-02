@@ -1,5 +1,6 @@
 import CornerNav from '@/components/CornerNav';
 import localFont from 'next/font/local';
+import Nav from '@/components/Nav';
 
 const virtualRealm = localFont({
   src: '../public/fonts/VirtualRealm.ttf',
@@ -13,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <style>{`html, body { margin: 0; padding: 0; }`}</style>
       </head>
       <body>
-        <CornerNav />   
+        <Nav />   
         {children}
       </body>
     </html>

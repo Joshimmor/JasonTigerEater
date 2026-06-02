@@ -49,7 +49,7 @@ export default function HeroSection({ photoUrl, photoAlt = 'Jason Tiger Eater' }
         suppressHydrationWarning
         style={{
           position: 'relative',
-          width: windowSize.width > 768 ? '50%' : '100%',
+          width: windowSize.width > 768 ? '40%' : '90%',
           // maxWidth: '1000px',
           height: 'auto',
           aspectRatio: '4/4',

@@ -155,12 +155,12 @@ export default function MiniPlayer({ tracks }: MiniPlayerProps) {
       />
 
       {/* Seekable progress bar */}
-      <div
+      {/*<div
         onClick={seek}
         style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: '#EEE8E0', cursor: 'pointer' }}
       >
         <div style={{ height: '100%', background: '#C84B00', width: `${progress}%`, transition: 'width 0.25s linear' }} />
-      </div>
+      </div>/*}
 
       {/* Player row */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 16px 16px' }}>

@@ -36,6 +36,30 @@ export async function getUpcomingShows(): Promise<BandsintownEvent[]> {
   return data;
 }
 
+export async function getShowById(id: string): Promise<BandsintownEvent | null> {
+  // Check upcoming shows first (cheap, already cached)
+  const upcoming = await getUpcomingShows();
+  const found = upcoming.find(s => s.id === id);
+  if (found) return found;
+
+  // Fall back: wider ±6-month window to cover recently-past shows
+  const encodedArtist = encodeURIComponent(ARTIST_NAME);
+  const now = new Date();
+  const past = new Date(now); past.setMonth(past.getMonth() - 6);
+  const future = new Date(now); future.setMonth(future.getMonth() + 6);
+  const fmt = (d: Date) => d.toISOString().split('T')[0];
+
+  const res = await fetch(
+    `https://rest.bandsintown.com/artists/${encodedArtist}/events?app_id=${APP_ID}&date=${fmt(past)},${fmt(future)}`,
+    { next: { revalidate: 3600 } }
+  );
+  if (!res.ok) return null;
+
+  const data: BandsintownEvent[] = await res.json();
+  if (!Array.isArray(data)) return null;
+  return data.find(s => s.id === id) ?? null;
+}
+
 export function formatShowDate(isoString: string): { day: string; month: string; full: string } {
   const date = new Date(isoString);
   return {

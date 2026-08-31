@@ -1,6 +1,7 @@
 'use client';
 // components/ShowsSection.tsx
 
+import Link from 'next/link';
 import type { BandsintownEvent } from '@/types/api';
 import { formatShowDate } from '@/lib/bandsintown';
 
@@ -60,15 +61,37 @@ export default function ShowsSection({ shows }: ShowsSectionProps) {
               <div
                 key={show.id}
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: '56px 1fr auto',
-                  alignItems: 'center',
-                  gap: '16px',
-                  padding: '18px 0',
+                  position: 'relative',
                   borderTop: '0.5px solid #D8D0C4',
                   ...(i === shows.length - 1 ? { borderBottom: '0.5px solid #D8D0C4' } : {}),
                 }}
               >
+                {/* Full-row link — sits below ticket button in z-order */}
+                <Link
+                  href={`/shows/${show.id}`}
+                  aria-label={`${show.venue.name} — show details`}
+                  style={{ position: 'absolute', inset: 0, zIndex: 1 }}
+                />
+
+                <div
+                  style={{
+                    position: 'relative',
+                    display: 'grid',
+                    gridTemplateColumns: show.thumb_url ? '48px 56px 1fr auto' : '56px 1fr auto',
+                    alignItems: 'center',
+                    gap: '16px',
+                    padding: '18px 0',
+                  }}
+                >
+                  {/* Thumbnail */}
+                  {show.thumb_url && (
+                    <img
+                      src={show.thumb_url}
+                      alt=""
+                      aria-hidden
+                      style={{ width: '48px', height: '48px', objectFit: 'cover', display: 'block', borderRadius: '2px' }}
+                    />
+                  )}
                 {/* Date */}
                 <div style={{ textAlign: 'center' }}>
                   <p style={{
@@ -115,36 +138,39 @@ export default function ShowsSection({ shows }: ShowsSectionProps) {
                   </p>
                 </div>
 
-                {/* Ticket link */}
-                {ticketOffer && (
-                  <a
-                    href={ticketOffer.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-                      fontSize: '9px',
-                      letterSpacing: '0.15em',
-                      color: '#C84B00',
-                      textDecoration: 'none',
-                      border: '0.5px solid #C84B00',
-                      padding: '7px 10px',
-                      textTransform: 'uppercase',
-                      whiteSpace: 'nowrap',
-                      transition: 'background 0.2s, color 0.2s',
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.background = '#C84B00';
-                      e.currentTarget.style.color = '#fff';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.background = 'transparent';
-                      e.currentTarget.style.color = '#C84B00';
-                    }}
-                  >
-                    {ticketOffer.status === 'sold_out' ? 'Sold Out' : 'Tickets'}
-                  </a>
-                )}
+                  {/* Ticket link — z-index above the row overlay */}
+                  {ticketOffer && (
+                    <a
+                      href={ticketOffer.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        position: 'relative',
+                        zIndex: 2,
+                        fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                        fontSize: '9px',
+                        letterSpacing: '0.15em',
+                        color: '#C84B00',
+                        textDecoration: 'none',
+                        border: '0.5px solid #C84B00',
+                        padding: '7px 10px',
+                        textTransform: 'uppercase',
+                        whiteSpace: 'nowrap',
+                        transition: 'background 0.2s, color 0.2s',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.background = '#C84B00';
+                        e.currentTarget.style.color = '#fff';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.background = 'transparent';
+                        e.currentTarget.style.color = '#C84B00';
+                      }}
+                    >
+                      {ticketOffer.status === 'sold_out' ? 'Sold Out' : 'Tickets'}
+                    </a>
+                  )}
+                </div>
               </div>
             );
           })}

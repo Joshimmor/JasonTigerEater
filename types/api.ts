@@ -52,6 +52,8 @@ export interface BandsintownEvent {
   datetime: string; // ISO string
   title: string;
   description?: string;
+  thumb_url?: string;
+  image_url?: string;
   venue: BandsintownVenue;
   offers: BandsintownOffer[];
   lineup: string[];

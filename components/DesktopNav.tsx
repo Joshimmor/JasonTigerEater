@@ -22,8 +22,7 @@ export default function DesktopNav() {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      background: 'rgba(10,10,10,0.88)',
-      backdropFilter: 'blur(10px)',
+      pointerEvents: 'none',
     }}>
       <Link href="/" style={{
         fontFamily: "var(--font-virtual-realm), sans-serif",
@@ -34,11 +33,12 @@ export default function DesktopNav() {
         color: '#C84B00',
         textDecoration: 'none',
         textTransform: 'uppercase',
+        pointerEvents: 'all',
       }}>
         JASON<br />TIGER<br />EATER
       </Link>
 
-      <nav style={{ width: '50%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <nav style={{ width: '50%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', pointerEvents: 'all' }}>
         {LINKS.map(({ label, href }) => {
           const isActive = pathname === href;
           return (
@@ -52,11 +52,11 @@ export default function DesktopNav() {
                 letterSpacing: '0.12em',
                 textDecoration: 'none',
                 textTransform: 'uppercase',
-                color: isActive ? '#C84B00' : '#F5F0EB',
+                color: isActive ? '#0A0A0A' : '#C84B00',
                 transition: 'color 0.2s ease',
               }}
-              onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#C84B00'; }}
-              onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#F5F0EB'; }}
+              onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#0A0A0A'; }}
+              onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#C84B00'; }}
             >
               {label}
             </Link>

@@ -17,23 +17,27 @@ const ROCKAWAY =
 const CLIP_PATH = `${QUEENS_MAIN} ${ROCKAWAY}`;
 
 export default function NoPlaceLikeHomePage() {
-  const rows = Array.from({ length: 14 });
+  const rows = Array.from({ length: 10 });
 
   return (
-    <main style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", overflow: 'hidden' }}>
+    <main style={{
+      height: '100dvh',
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+      fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+    }}>
 
       {/* ── Green flyer section ── */}
       <section style={{
         position: 'relative',
         background: '#8DC63F',
-        minHeight: '100vh',
+        flex: 1,
+        minHeight: 0,
         overflow: 'hidden',
         display: 'flex',
-        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: '72px',   // clear the fixed nav
-        paddingBottom: '48px',
       }}>
 
         {/* Repeating outline-text background */}
@@ -42,23 +46,21 @@ export default function NoPlaceLikeHomePage() {
           inset: 0,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: 'space-around',
           pointerEvents: 'none',
-          gap: 0,
+          overflow: 'hidden',
         }}>
           {rows.map((_, i) => (
             <div
               key={i}
               style={{
                 whiteSpace: 'nowrap',
-                fontWeight: 900,
-                fontSize: 'clamp(30px, 5.2vw, 58px)',
-                letterSpacing: '0.04em',
-                fontStyle: 'italic',
+                fontFamily: 'var(--font-virtual-realm), sans-serif',
+                fontSize: 'clamp(22px, 3.8vw, 48px)',
+                letterSpacing: '0.05em',
                 color: 'transparent',
                 WebkitTextStroke: '1.5px #E84B00',
                 textTransform: 'uppercase',
-                lineHeight: 1.08,
                 userSelect: 'none',
               }}
             >
@@ -74,9 +76,9 @@ export default function NoPlaceLikeHomePage() {
           left: '24px',
           zIndex: 10,
         }}>
-          <p style={{ fontWeight: 700, fontSize: '13px', lineHeight: 1.5, color: '#0A0A0A', fontFamily: 'monospace' }}>6 PM</p>
-          <p style={{ fontSize: '13px', lineHeight: 1.5, color: '#0A0A0A', fontFamily: 'monospace' }}>85-41 Forest Pkwy</p>
-          <p style={{ fontSize: '13px', lineHeight: 1.5, color: '#0A0A0A', fontFamily: 'monospace' }}>Woodhaven NY 11421</p>
+          <p style={{ fontWeight: 700, fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.5, color: '#0A0A0A', fontFamily: 'monospace' }}>6 PM</p>
+          <p style={{ fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.5, color: '#0A0A0A', fontFamily: 'monospace' }}>85-41 Forest Pkwy</p>
+          <p style={{ fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.5, color: '#0A0A0A', fontFamily: 'monospace' }}>Woodhaven NY 11421</p>
         </div>
 
         {/* Top-right date block */}
@@ -93,7 +95,7 @@ export default function NoPlaceLikeHomePage() {
             writingMode: 'vertical-rl',
             transform: 'rotate(180deg)',
             fontWeight: 700,
-            fontSize: '9px',
+            fontSize: 'clamp(11px, 1.1vw, 14px)',
             letterSpacing: '0.22em',
             color: '#0A0A0A',
             paddingBottom: '4px',
@@ -103,14 +105,14 @@ export default function NoPlaceLikeHomePage() {
           <div style={{ textAlign: 'right' }}>
             <div style={{
               fontWeight: 900,
-              fontSize: 'clamp(52px, 9vw, 88px)',
+              fontSize: 'clamp(52px, 7vw, 82px)',
               lineHeight: 0.88,
               color: '#0A0A0A',
               letterSpacing: '-0.04em',
             }}>24</div>
             <div style={{
               fontWeight: 700,
-              fontSize: 'clamp(14px, 2.5vw, 20px)',
+              fontSize: 'clamp(15px, 2vw, 20px)',
               letterSpacing: '0.14em',
               color: '#0A0A0A',
               fontFamily: 'monospace',
@@ -124,7 +126,7 @@ export default function NoPlaceLikeHomePage() {
           {/* Queens map SVG */}
           <svg
             viewBox="-10 0 440 590"
-            style={{ width: 'clamp(200px, 45vw, 370px)', display: 'block', filter: 'drop-shadow(0 4px 24px rgba(0,0,0,0.18))' }}
+            style={{ height: 'clamp(160px, 34vh, 280px)', width: 'auto', display: 'block', filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.18))' }}
             aria-hidden
           >
             <defs>
@@ -173,18 +175,17 @@ export default function NoPlaceLikeHomePage() {
 
           {/* Center title — overlaps the bottom of the map */}
           <div style={{
-            marginTop: '-36px',
-            textAlign: 'center',
-            fontWeight: 900,
-            fontSize: 'clamp(34px, 7.5vw, 70px)',
-            letterSpacing: '0.01em',
+            marginTop: '-28px',
+            fontFamily: 'var(--font-virtual-realm), sans-serif',
+            fontSize: 'clamp(28px, 5vw, 54px)',
+            letterSpacing: '0.03em',
             textTransform: 'uppercase',
-            fontStyle: 'italic',
-            lineHeight: 0.95,
+            lineHeight: 1,
             color: '#E84B00',
-            textShadow: '3px 3px 0 #A83200, 5px 5px 0 rgba(0,0,0,0.15)',
+            textShadow: '2px 2px 0 #A83200',
             position: 'relative',
             zIndex: 6,
+            textAlign: 'center',
           }}>
             JASON TIGER EATER
           </div>
@@ -194,26 +195,26 @@ export default function NoPlaceLikeHomePage() {
       {/* ── White bottom section ── */}
       <section style={{
         background: '#F0EDE3',
-        padding: 'clamp(36px, 5vw, 64px) clamp(20px, 5vw, 60px)',
+        padding: 'clamp(18px, 2.8vh, 40px) clamp(20px, 5vw, 60px)',
         textAlign: 'center',
+        flex: '0 0 auto',
       }}>
         <h1 style={{
           fontWeight: 900,
-          fontSize: 'clamp(38px, 8.5vw, 88px)',
+          fontSize: 'clamp(32px, 7vw, 80px)',
           letterSpacing: '-0.025em',
           textTransform: 'uppercase',
           color: '#0A0A0A',
-          lineHeight: 0.92,
+          lineHeight: 0.9,
           margin: 0,
         }}>
-          NO PLACE<br />LIKE HOME
+          NO PLACE LIKE HOME
         </h1>
         <p style={{
-          marginTop: '16px',
-          fontSize: 'clamp(13px, 1.8vw, 16px)',
+          marginTop: '10px',
+          fontSize: 'clamp(14px, 1.8vw, 18px)',
           color: '#555',
           fontStyle: 'italic',
-          letterSpacing: '0.01em',
         }}>
           a show at the Queens Public Library in Woodhaven
         </p>

@@ -38,7 +38,7 @@ export default function DesktopNav() {
         JASON<br />TIGER<br />EATER
       </Link>
 
-      <nav style={{ width: '50%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', pointerEvents: 'all' }}>
+      <nav style={{ width: '25%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', pointerEvents: 'all' }}>
         {LINKS.map(({ label, href }) => {
           const isActive = pathname === href;
           return (
@@ -52,11 +52,21 @@ export default function DesktopNav() {
                 letterSpacing: '0.12em',
                 textDecoration: 'none',
                 textTransform: 'uppercase',
-                color: isActive ? '#0A0A0A' : '#C84B00',
-                transition: 'color 0.2s ease',
+                // bottom-to-top fill: gradient shifts up on hover to reveal black
+                background: 'linear-gradient(to bottom, #C84B00 50%, #0A0A0A 50%)',
+                backgroundSize: '100% 200%',
+                backgroundPosition: isActive ? '0% 100%' : '0% 0%',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+                transition: 'background-position 0.45s ease',
               }}
-              onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#0A0A0A'; }}
-              onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#C84B00'; }}
+              onMouseEnter={e => {
+                if (!isActive) (e.currentTarget as HTMLAnchorElement).style.backgroundPosition = '0% 100%';
+              }}
+              onMouseLeave={e => {
+                if (!isActive) (e.currentTarget as HTMLAnchorElement).style.backgroundPosition = '0% 0%';
+              }}
             >
               {label}
             </Link>

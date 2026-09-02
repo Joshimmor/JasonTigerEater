@@ -59,9 +59,26 @@ export default async function BioPage() {
 	const fullBio = cms?.bio?.fullBio;
 
 	return (
-		<main className="min-h-screen w-[50vw] px-6 pb-20 pt-32 sm:px-10 lg:px-16">
-			<article className="my-5 mx-auto max-w-xl">
-				<h1 className="py-10 font-[family-name:var(--font-virtual-realm)] text-5xl sm:text-6xl">
+		<div 
+            style={{
+                minHeight:"screen",
+                width:"100vw",
+                height:"100vh",
+                display:"flex",
+                justifyContent:"center",
+                alignItems:"center"
+            }}>
+			<div className="my-5 mx-auto max-w-xl"
+                        style={{
+                
+                width:"50vw",
+            }}
+            >
+				<h1 
+                style={{
+                fontFamily:"var(--font-virtual-realm)",
+                color:"#C84B00"       
+            }}>
 					Bio
 				</h1>
 				{fullBio?.length ? (
@@ -71,7 +88,7 @@ export default async function BioPage() {
 				) : (
 					<p className="text-lg">Bio coming soon.</p>
 				)}
-			</article>
-		</main>
+			</div>
+		</div>
 	);
 }

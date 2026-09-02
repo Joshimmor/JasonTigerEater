@@ -77,21 +77,29 @@ export default function ShowsSection({ shows }: ShowsSectionProps) {
                   style={{
                     position: 'relative',
                     display: 'grid',
-                    gridTemplateColumns: show.thumb_url ? '48px 56px 1fr auto' : '56px 1fr auto',
+                    gridTemplateColumns:  '48px 56px 1fr auto',
                     alignItems: 'center',
                     gap: '16px',
                     padding: '18px 0',
                   }}
                 >
                   {/* Thumbnail */}
-                  {show.thumb_url && (
+                  {/* {show.thumb_url && (
                     <img
+                     
                       src={show.thumb_url}
                       alt=""
                       aria-hidden
                       style={{ width: '48px', height: '48px', objectFit: 'cover', display: 'block', borderRadius: '2px' }}
                     />
-                  )}
+                  )} */}
+                  <img
+                      src="https://photos.bandsintown.com/thumb/26060911.jpeg"
+                      // src={show.thumb_url}
+                      alt=""
+                      aria-hidden
+                      style={{ width: '48px', height: '48px', objectFit: 'cover', display: 'block', borderRadius: '2px' }}
+                  />
                 {/* Date */}
                 <div style={{ textAlign: 'center' }}>
                   <p style={{

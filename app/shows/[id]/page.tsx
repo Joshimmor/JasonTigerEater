@@ -78,7 +78,7 @@ export default async function ShowPage({
         }}
       >
         {/* Event image */}
-        {show.image_url && (
+        {/* {show.image_url && (
           <img
             src={show.image_url}
             alt={`${show.venue.name} event flyer`}
@@ -89,8 +89,19 @@ export default async function ShowPage({
               boxShadow: '0 8px 48px rgba(0,0,0,0.6)',
             }}
           />
-        )}
-
+        )} */}
+        <img
+                      src="https://media.bandsintown.com/900x900/26060911.webp"
+                      // src={show.thumb_url}
+                      alt=""
+                      aria-hidden
+                      style={{
+                      width: '50%',
+                      display: 'block',
+                      borderRadius: '2px',
+                      boxShadow: '0 8px 48px rgba(0,0,0,0.6)',
+                    }}
+        />
         {/* Event info */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
 

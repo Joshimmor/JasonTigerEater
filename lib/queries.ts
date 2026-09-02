@@ -19,6 +19,12 @@ export const bioQuery = `*[_type == "bio"][0] {
   }
 }` as const;
 
+export const fullBioPageQuery = `{
+  "bio": *[_type == "bio"][0] {
+    "fullBio": longBio
+  }
+}` as const;
+
 export const aboutQuery = `*[_type == "about"][0] {
   originStory,
   influences,

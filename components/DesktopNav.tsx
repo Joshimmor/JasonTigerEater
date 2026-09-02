@@ -38,7 +38,7 @@ export default function DesktopNav() {
         JASON<br />TIGER<br />EATER
       </Link>
 
-      <nav style={{ width: '25%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', pointerEvents: 'all' }}>
+      <nav style={{ maxWidth: '50%',minWidth:'40%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', pointerEvents: 'all',paddingRight:"25px" }}>
         {LINKS.map(({ label, href }) => {
           const isActive = pathname === href;
           return (
@@ -60,6 +60,7 @@ export default function DesktopNav() {
                 backgroundClip: 'text',
                 color: 'transparent',
                 transition: 'background-position 0.45s ease',
+                padding:'1%'
               }}
               onMouseEnter={e => {
                 if (!isActive) (e.currentTarget as HTMLAnchorElement).style.backgroundPosition = '0% 100%';

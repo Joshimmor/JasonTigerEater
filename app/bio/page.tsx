@@ -63,7 +63,7 @@ export default async function BioPage() {
             style={{
                 minHeight:"screen",
                 width:"100vw",
-                height:"100vh",
+                height:"100%",
                 display:"flex",
                 justifyContent:"center",
                 alignItems:"center",
@@ -74,13 +74,13 @@ export default async function BioPage() {
                         style={{
                 
                 width:"50vw",
+				padding:"10vh 0 0 0" 
             }}
             >
 				<h1 
                 style={{
                 fontFamily:"var(--font-virtual-realm)",
-                color:'#ee6513'  ,
-				padding:"10vh 0 0 0"     
+                color:'#ee6513'      
             }}>
 					Bio
 				</h1>

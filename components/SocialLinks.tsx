@@ -1,6 +1,7 @@
 'use client';
 // components/SocialLinks.tsx
-// Fixed bottom-right social links, shown on the homepage.
+// Fixed bottom-right social links, shown on the homepage (desktop only).
+import { useEffect, useState } from 'react';
 
 const SOCIAL_LINKS = [
   { label: 'Instagram',   href: process.env.NEXT_PUBLIC_INSTAGRAM_URL   ?? '#' },
@@ -10,6 +11,19 @@ const SOCIAL_LINKS = [
 ];
 
 export default function SocialLinks() {
+  const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
+
+  // Matches the NavController desktop breakpoint
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  if (!isDesktop) return null;
+
   return (
     <div style={{
       position: 'fixed',

@@ -1,7 +1,7 @@
 'use client';
 // components/MediaPlaylist.tsx
 // Renders every video in a YouTube playlist as a full-viewport, scroll-snapped section.
-import { useEffect, useState, type CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 
 interface MediaPlaylistProps {
   playlistId: string;
@@ -36,6 +36,8 @@ function loadYouTubeIframeApi(): Promise<void> {
 
 export default function MediaPlaylist({ playlistId }: MediaPlaylistProps) {
   const [videoIds, setVideoIds] = useState<string[] | null>(null);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -73,13 +75,19 @@ export default function MediaPlaylist({ playlistId }: MediaPlaylistProps) {
   }
 
   return (
-    <div style={{
-      width: '100vw',
-      height: '100vh',
-      overflowY: 'scroll',
-      scrollSnapType: 'y mandatory',
-      background: '#0A0A0A',
-    }}>
+    <>
+    <div
+      ref={containerRef}
+      onScroll={() => {
+        if (!hasScrolled && (containerRef.current?.scrollTop ?? 0) > 20) setHasScrolled(true);
+      }}
+      style={{
+        width: '100vw',
+        height: '100vh',
+        overflowY: 'scroll',
+        scrollSnapType: 'y mandatory',
+        background: '#0A0A0A',
+      }}>
       {videoIds.map((id) => (
         <section
           key={id}
@@ -105,6 +113,37 @@ export default function MediaPlaylist({ playlistId }: MediaPlaylistProps) {
         </section>
       ))}
     </div>
+    {videoIds.length > 1 && (
+      <div style={{
+        position: 'fixed',
+        bottom: '32px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 20,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '6px',
+        color: '#F5F0EB',
+        fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+        fontSize: '11px',
+        letterSpacing: '0.15em',
+        textTransform: 'uppercase',
+        opacity: hasScrolled ? 0 : 1,
+        transition: 'opacity 0.4s ease',
+        pointerEvents: 'none',
+      }}>
+        <span>Scroll</span>
+        <span style={{ display: 'inline-block', animation: 'mediaScrollCue 1.4s ease-in-out infinite' }}>↓</span>
+      </div>
+    )}
+    <style>{`
+      @keyframes mediaScrollCue {
+        0%, 100% { transform: translateY(0); opacity: 0.5; }
+        50% { transform: translateY(6px); opacity: 1; }
+      }
+    `}</style>
+    </>
   );
 }
 

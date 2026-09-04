@@ -74,7 +74,7 @@ export default async function BioPage() {
                         style={{
                 
                 width:"50vw",
-				padding:"10vh 0 0 0" 
+				padding:"15vh 0 0 0" 
             }}
             >
 				<h1 

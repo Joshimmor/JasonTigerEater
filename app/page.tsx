@@ -7,6 +7,7 @@ import { sanityFetch } from '@/lib/sanity';
 import { homepageQuery } from '@/lib/queries';
 import { HomepageData } from '@/sanity/lib/types';
 import MiniPlayer from '@/components/miniplayer';
+import SocialLinks from '@/components/SocialLinks';
 import { getArtistTopTracks } from '@/lib/spotify'
 
 export const revalidate = 3600; // ISR — rebuild page every hour
@@ -25,6 +26,7 @@ export default async function HomePage() {
     <main>
       <HeroSection photoUrl={heroPhoto} />
       {tracks.length > 0 && <MiniPlayer tracks={tracks} />}
+      <SocialLinks />
       {/* <MusicSection releases={releases} spotifyArtistId={spotifyArtistId} />
       <ShowsSection shows={shows} /> */}
     </main>

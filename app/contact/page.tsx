@@ -27,7 +27,7 @@ function Field({
   const [focused, setFocused] = useState(false);
   const base: React.CSSProperties = {
     width: '100%', background: 'transparent', border: 'none',
-    borderBottom: `1px solid ${focused ? '#C84B00' : '#E0D8D0'}`,
+    borderBottom: `1px solid ${focused ? '#ee6513' : '#070e01'}`,
     outline: 'none', padding: '10px 0', resize: 'none',
     fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
     fontSize: '15px', color: '#111',
@@ -37,7 +37,7 @@ function Field({
     <motion.div variants={fadeUp} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
       <label style={{
         fontSize: '9px', letterSpacing: '0.22em', textTransform: 'uppercase',
-        fontWeight: 700, color: focused ? '#C84B00' : '#bbb',
+        fontWeight: 700, color: focused ? '#ee6513' : '#070e01',
         fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
         transition: 'color 0.25s ease',
       }}>
@@ -82,7 +82,7 @@ export default function ContactPage() {
 
   return (
     <main style={{
-      minHeight: '100svh', background: '#fff',
+      minHeight: '100svh', background: '#bec927',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       padding: '80px 28px',
     }}>
@@ -93,7 +93,7 @@ export default function ContactPage() {
         {/* Label */}
         <motion.p variants={fadeUp} style={{
           fontSize: '10px', letterSpacing: '0.28em', textTransform: 'uppercase',
-          color: '#C84B00', fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+          color: '#ee6513', fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           margin: 0,
         }}>
           Booking Inquiry
@@ -107,10 +107,10 @@ export default function ContactPage() {
             lineHeight: 0.88, letterSpacing: '-0.03em',
             color: '#111', textTransform: 'uppercase', margin: 0,
           }}>
-            GET<br />IN<br /><span style={{ color: '#C84B00' }}>TOUCH</span>
+            GET<br />IN<br /><span style={{ color: '#ee6513' }}>TOUCH</span>
           </motion.h1>
           <motion.div variants={lineGrow} style={{
-            height: '2px', background: '#C84B00', marginTop: '20px', width: '48px',
+            height: '2px', background: '#ee6513', marginTop: '20px', width: '48px',
           }} />
         </div>
 
@@ -144,7 +144,7 @@ export default function ContactPage() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 style={{
-                  background: '#C84B00', color: '#fff', border: 'none',
+                  background: '#ee6513', color: '#fff', border: 'none',
                   padding: '16px 36px', cursor: status === 'sending' ? 'not-allowed' : 'pointer',
                   fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
                   fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700,

@@ -112,7 +112,7 @@ export default async function ShowPage({
                 fontFamily: 'var(--font-virtual-realm), sans-serif',
                 fontSize: '13px',
                 letterSpacing: '0.18em',
-                color: '#C84B00',
+                color: '#ee6513',
                 textTransform: 'uppercase',
                 margin: '0 0 6px',
               }}
@@ -125,7 +125,7 @@ export default async function ShowPage({
                   fontFamily: 'var(--font-virtual-realm), sans-serif',
                   fontSize: 'clamp(72px, 12vw, 120px)',
                   lineHeight: 0.88,
-                  color: '#C84B00',
+                  color: '#ee6513',
                   letterSpacing: '-0.03em',
                 }}
               >
@@ -135,7 +135,7 @@ export default async function ShowPage({
                 style={{
                   fontFamily: 'var(--font-virtual-realm), sans-serif',
                   fontSize: 'clamp(22px, 4vw, 40px)',
-                  color: '#C84B00',
+                  color: '#ee6513',
                   letterSpacing: '0.1em',
                 }}
               >

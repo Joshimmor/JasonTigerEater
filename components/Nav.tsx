@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import HomeIcon from './HomeIcon';
 
 const LINKS = [
   { label: 'Home',    href: '/' },
@@ -89,10 +90,9 @@ export default function Nav() {
           zIndex: 110,
           position: 'relative',
           textAlign: 'left',
+          display: 'block'
         }}>
-        JASON <br/>
-        TIGER <br/>
-        EATER
+          <HomeIcon/>
         </Link>
 
         {/* Hamburger button */}
@@ -107,7 +107,7 @@ export default function Nav() {
         >
           <motion.span animate={{ rotate: open ? 45 : 0, y: open ? 7 : 0 }}
             transition={{ duration: 0.3 }}
-            style={{ display: 'block', width: '24px', height: '2px', background: '#C84B00', transformOrigin: 'center' }}
+            style={{ display: 'block', width: '24px', height: '2px', background: '#ee6513', transformOrigin: 'center' }}
           />
           <motion.span animate={{ opacity: open ? 0 : 1, scaleX: open ? 0 : 1 }}
             transition={{ duration: 0.2 }}
@@ -115,7 +115,7 @@ export default function Nav() {
           />
           <motion.span animate={{ rotate: open ? -45 : 0, y: open ? -7 : 0 }}
             transition={{ duration: 0.3 }}
-            style={{ display: 'block', width: '24px', height: '2px', background: '#C84B00', transformOrigin: 'center' }}
+            style={{ display: 'block', width: '24px', height: '2px', background: '#ee6513', transformOrigin: 'center' }}
           />
         </button>
       </header>
@@ -159,7 +159,7 @@ export default function Nav() {
                         lineHeight: 1.05,
                         textDecoration: 'none',
                         textTransform: 'uppercase',
-                        color: isActive ? '#C84B00' : '#F5F0EB',
+                        color: isActive ? '#ee6513' : '#F5F0EB',
                         display: 'block',
                         transition: 'color 0.2s ease',
                       }}

@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import HomeIcon from './HomeIcon';
 
 const LINKS = [
   { label: 'Home',    href: '/' },
@@ -10,6 +11,8 @@ const LINKS = [
   { label: 'Merch',   href: '/merch' },
   { label: 'Contact', href: '/contact' },
 ];
+
+const ACTIVE_LINK_COLOR = '#070e01';
 
 export default function DesktopNav() {
   const pathname = usePathname();
@@ -24,18 +27,8 @@ export default function DesktopNav() {
       alignItems: 'center',
       pointerEvents: 'none',
     }}>
-      <Link href="/" style={{
-        fontFamily: "var(--font-virtual-realm), sans-serif",
-        fontSize: '18px',
-        fontWeight: 700,
-        letterSpacing: '0.05em',
-        lineHeight: 0.87,
-        color: '#C84B00',
-        textDecoration: 'none',
-        textTransform: 'uppercase',
-        pointerEvents: 'all',
-      }}>
-        JASON<br />TIGER<br />EATER
+      <Link href="/" style={{ pointerEvents: 'all', display: 'block' }}>
+        <HomeIcon/>
       </Link>
 
       <nav style={{ maxWidth: '50%',minWidth:'40%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', pointerEvents: 'all',paddingRight:"25px" }}>
@@ -53,14 +46,16 @@ export default function DesktopNav() {
                 textDecoration: 'none',
                 textTransform: 'uppercase',
                 // bottom-to-top fill: gradient shifts up on hover to reveal black
-                background: 'linear-gradient(to bottom, #C84B00 50%, #0A0A0A 50%)',
+                backgroundImage: isActive ? 'none' : 'linear-gradient(to bottom, #162c04 50%, #0c1802 50%)',
+                backgroundColor: isActive ? ACTIVE_LINK_COLOR : 'transparent',
                 backgroundSize: '100% 200%',
                 backgroundPosition: isActive ? '0% 100%' : '0% 0%',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
                 transition: 'background-position 0.45s ease',
-                padding:'1%'
+                padding: '1% 1% 4px',
+                borderBottom: isActive ? `2px solid ${ACTIVE_LINK_COLOR}` : '2px solid transparent',
               }}
               onMouseEnter={e => {
                 if (!isActive) (e.currentTarget as HTMLAnchorElement).style.backgroundPosition = '0% 100%';

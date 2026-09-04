@@ -32,7 +32,7 @@ export default function HeroSection({ photoUrl, photoAlt = 'Jason Tiger Eater' }
       data-navcolor="#C84B00"
       style={{
         
-        background: '#ffffff',
+        background: '#bec927',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

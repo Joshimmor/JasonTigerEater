@@ -12,9 +12,11 @@
     width: 100%;
     height: 100%;
     overflow-x: hidden;
+    background-color: #bec927;;
   }
 
   body {
+    background-color: #bec927;;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: var(--background);
@@ -24,8 +26,9 @@
 }
 
 :root {
-  --background: #fbf7f1;
+  /* --background: #fbf7f1; */
   --foreground: #171717;
+  --background: #bec927;
 }
 
 @theme inline {
@@ -38,7 +41,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground:#bec927;
   }
 }
 

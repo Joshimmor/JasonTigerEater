@@ -66,7 +66,9 @@ export default async function BioPage() {
                 height:"100vh",
                 display:"flex",
                 justifyContent:"center",
-                alignItems:"center"
+                alignItems:"center",
+				background: '#bec927',
+				
             }}>
 			<div className="my-5 mx-auto max-w-xl"
                         style={{
@@ -77,7 +79,8 @@ export default async function BioPage() {
 				<h1 
                 style={{
                 fontFamily:"var(--font-virtual-realm)",
-                color:"#C84B00"       
+                color:'#ee6513'  ,
+				padding:"10vh 0 0 0"     
             }}>
 					Bio
 				</h1>

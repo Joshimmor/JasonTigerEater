@@ -15,7 +15,7 @@ export default function ShowsSection({ shows }: ShowsSectionProps) {
       data-navcolor="#C84B00"
       style={{
         minHeight: '100svh',
-        background: '#F5F0EA',
+        background: '#bec927',
         padding: '80px 28px',
         display: 'flex',
         flexDirection: 'column',
@@ -30,7 +30,7 @@ export default function ShowsSection({ shows }: ShowsSectionProps) {
         fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
         fontSize: '10px',
         letterSpacing: '0.28em',
-        color: '#C84B00',
+        color: '#ee6513',
         textTransform: 'uppercase',
         margin: 0,
       }}>
@@ -115,7 +115,7 @@ export default function ShowsSection({ shows }: ShowsSectionProps) {
                   <p style={{
                     fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
                     fontSize: '9px',
-                    color: '#C84B00',
+                    color: '#ee6513',
                     letterSpacing: '0.15em',
                     margin: '3px 0 0',
                     textTransform: 'uppercase',
@@ -197,7 +197,7 @@ export default function ShowsSection({ shows }: ShowsSectionProps) {
             letterSpacing: '0.1em',
             transition: 'color 0.2s',
           }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#C84B00')}
+          onMouseEnter={e => (e.currentTarget.style.color = '#ee6513')}
           onMouseLeave={e => (e.currentTarget.style.color = '#888')}
         >
           Want us at your event? → Book a show
